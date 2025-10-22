@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Software Testing — Mock Test & Practice</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--good:#10b981;--bad:#ef4444}
+    body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#051025, #071631);color:#e6eef6;margin:0;padding:24px}
+    .wrap{max-width:980px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    h1{font-size:20px;margin:0}
+    .controls{display:flex;gap:8px;align-items:center}
+    select,input{padding:8px;border-radius:8px;border:0;background:#071229;color:#e6eef6}
+    button{background:var(--accent);color:#04202a;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    .meta{display:flex;gap:12px;align-items:center;color:var(--muted);margin-bottom:12px}
+    .question{font-weight:600;margin-bottom:8px}
+    .options{display:grid;gap:8px}
+    .option{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .option.selected{outline:2px solid rgba(6,182,212,0.16)}
+    .option.correct{background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.25)}
+    .option.wrong{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25)}
+    footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .small{font-size:13px;color:var(--muted)}
+    .result{padding:12px;border-radius:10px;margin-top:14px}
+    .hide{display:none}
+    .week-list{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .chip{padding:6px 10px;border-radius:999px;background:#071631;border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+    .chip.active{background:var(--accent);color:#03121a}
+    .big{font-size:18px}
+    .actions{display:flex;gap:8px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .explain{margin-top:8px;color:var(--muted);font-size:13px}
+    @media (max-width:720px){.wrap{padding:0 12px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Software Testing — Mock Test & Practice</h1>
+        <div class="small">Questions & answers from provided PDF — practice mode & timed mock tests.</div>
+      </div>
+      <div class="controls">
+        <label class="small">Mode:</label>
+        <select id="mode">
+          <option value="practice">Practice (See answers instantly)</option>
+          <option value="mock">Mock Test (Timed, scored)</option>
+        </select>
+        <label class="small">Week:</label>
+        <select id="weekSelect"></select>
+        <button id="startBtn">Start</button>
+      </div>
+    </header>
+
+    <div class="card" id="mainCard">
+      <div id="intro">
+        <p>Select a mode and week (or All Weeks) and click <strong>Start</strong>. Practice mode lets you try questions and reveal answers. Mock mode gives a timed test with scoring and review.</p>
+        <div class="week-list" id="weekChips"></div>
+      </div>
+
+      <div id="testArea" class="hide">
+        <div class="meta">
+          <div id="progress">Question <span id="qIdx">0</span> / <span id="qTotal">0</span></div>
+          <div id="timer" class="small">Timer: --:--</div>
+          <div class="small" id="scoreDisplay">Score: 0</div>
+        </div>
+
+        <div id="qCard">
+          <div class="question big" id="questionText">Question text</div>
+          <div class="options" id="optionsList"></div>
+          <div class="explain" id="explainArea"></div>
+        </div>
+
+        <footer>
+          <div class="actions">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+            <button id="revealBtn">Reveal Answer</button>
+          </div>
+          <div>
+            <button id="submitBtn" class="hide">Submit Test</button>
+            <button id="endBtn" class="hide">End</button>
+          </div>
+        </footer>
+
+        <div id="resultArea" class="result hide card"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;color:var(--muted);font-size:13px">Tip: In mock mode you won't see correct answers until you submit. Use practice mode to study one-by-one.</div>
+  </div>
+
+<script>
+// Questions array extracted from the uploaded PDF (weeks 0-12). Each item: {week, q, text, options:[...], ans: index}
+const QUESTIONS = [
+// Week -0
+{week:0, q:1, text:"In the classical waterfall software development lifecycle, when is testing done?", options:["Along with coding.","After complete coding is done.","Coding and testing are repeated one after another.","After complete coding and integration with system."], ans:1},
+{week:0,q:2,text:"In Agile methodologies for software development, when is testing done?",options:["Testing is done along with coding by developers.","Testing is done along with coding by testers.","Testing is done after coding by developers.","Testing is done after coding by testers."],ans:0},
+{week:0,q:3,text:"Which of the following best defines black box testing?",options:["Testing done on the entire software.","Testing done to exercise parts of the software.","Testing done based on requirements only.","Testing done based on the structure of the software."],ans:2},
+{week:0,q:4,text:"What is regression testing?",options:["Testing done each time code is modified to ensure that the newly added code works as expected along with the existing code.","Testing done on the entire code each time a part of it is modified.","Testing done on the entire code after release, for each modification.","Testing done by customer on the newly added features in the code."],ans:0},
+{week:0,q:5,text:"State true or false: Testing can be entirely automated and done by using a tool without human intervention.",options:["True.","False."],ans:1},
+{week:0,q:6,text:"The term control flow graph, as used in testing, refers to which of the following?",options:["Graph representing the way functions or methods calling another function or method respectively.","Graph representing the flow chart of the program.","Graph representing all possible paths that might be traversed by a program.","Graph representing the statements, decisions and loops in a program."],ans:2},
+{week:0,q:7,text:"State true or false: Control flow graphs and data flow graphs are used in black box testing.",options:["True.","False."],ans:1},
+{week:0,q:8,text:"Which testing technique listed below uses relational and logical operators?",options:["Testing for functionality.","Testing based on inputs and expected outputs.","Testing for execution of decision statements in code.","Testing for execution of decisions and loops in code."],ans:3},
+{week:0,q:9,text:"State true or false: While testing web applications, both client side and server side testing is done.",options:["True.","False."],ans:0},
+{week:0,q:10,text:"Which of the following constitutes non-functional testing?",options:["Performance testing.","Black-box testing.","White-box testing.","Integration testing."],ans:0},
+
+// Week 1
+{week:1,q:1,text:"Suppose a method M1 calls M2, which calls M3. The level of testing that tests the interface of calls from M1 to M2 to M3 is called...",options:["Functional testing","Unit testing","Integration testing","System testing"],ans:2},
+{week:1,q:2,text:"A coverage criterion C1 is said to subsume C2 if there is at least one test case that satisfies C1 which also satisfies C2. True or False?",options:["True","False"],ans:1},
+{week:1,q:3,text:"Testing can be used to find all the errors in code. True/False?",options:["True","False"],ans:1},
+{week:1,q:4,text:"Which are practised in level 3 thinking during testing?",options:["Testing is a mental discipline, everyone in an organization strives to test thoroughly","Testing is done mainly by developers, to debug their code","Testing is done to identify failures and reduce risks","Testing is done to show absence of errors"],ans:2},
+{week:1,q:5,text:"Which best defines usability testing?",options:["Testing done to ensure software looks nice","Testing done to ensure the software is usable by all users","Testing done to understand how users can use a software","Testing done to ensure the user interface is as specified in the requirements"],ans:3},
+{week:1,q:6,text:"Which of the following is a list of white-box testing techniques?",options:["Unit testing, performance testing","Integration testing, stress testing","Unit testing, integration testing","Usability testing, performance testing"],ans:2},
+{week:1,q:7,text:"Which sentence best defines a test case?",options:["A test case contains only inputs to the software artifact","A test case contains inputs to the software artifact along with the expected outputs","A test case contains inputs and a decision on pass or fail","A test case contains inputs and the actual output is also recorded"],ans:1},
+{week:1,q:8,text:"When does a set of test cases T satisfy the test requirements TR for a coverage criterion C?",options:["For every test requirement tr ∈ TR, there is exactly one test case t ∈ T such that t satisfies tr","For some test requirement tr ∈ TR, there is some test case t ∈ T such that t satisfies tr","For some test requirement tr ∈ TR, all the test cases t ∈ T are such that t satisfies tr","For every test requirement tr ∈ TR, there is at least one test case t ∈ T such that t satisfies tr"],ans:3},
+{week:1,q:9,text:"When do we say that a coverage criterion C1 subsumes C2?",options:["C1 subsumes C2 iff some test case that satisfies C1 also satisfies C2","C1 subsumes C2 iff every test case that satisfies C1 also satisfies C2"],ans:1},
+{week:1,q:10,text:"What does JUnit assertFalse(val1 > val2) return when val1 is less than val2?",options:["True","False"],ans:0},
+
+// Week 2
+{week:2,q:1,text:"Which best defines an infeasible test path?",options:["An infeasible test path is one that does not exist in the graph","An infeasible test path is one that can be executed by a failed test case","An infeasible test path is one that cannot be executed by any test case","An infeasible test path is one that does not start at an initial vertex or end at a final vertex"],ans:2},
+{week:2,q:2,text:"How are test requirements defined and met in graphs-based structural coverage criteria?",options:["Test requirements are basically the same as test paths","Test requirements are defined as properties of test paths and met by using test paths that satisfy each test requirement"],ans:1},
+{week:2,q:3,text:"In control flow graphs, which term represents a basic block?",options:["A basic block is a sequence of statements such that there is no branching in the sequence","A basic block is any sequence of statements that occurs as a path in the control flow graph"],ans:0},
+{week:2,q:4,text:"A strongly connected component S in a CFG represents what in code?",options:["S represents the entire method if method has no loops","S represents a loop in the method"],ans:1},
+{week:2,q:5,text:"Which algorithm returns shortest paths between two nodes in a CFG? (refer to swayam for diagram)",options:["Breadth first search","Depth first search"],ans:0},
+{week:2,q:6,text:"There are test paths that achieve node coverage but not edge coverage. True/False?",options:["True","False"],ans:0},
+{week:2,q:7,text:"Which test path achieves edge coverage? (example)",options:["Test path [1,2,3,2,4]","Test paths [1,2,4] and [1,2,3,2]","Both the paths above","None"],ans:0},
+{week:2,q:8,text:"Does the test path [1,2,3,2,4] tour the pair of edges [3,2,3]? Yes/No",options:["Yes","No"],ans:1},
+{week:2,q:9,text:"The test paths {[1,2,4],[1,2,3,2,3,2,4]} achieve which coverage?",options:["Node coverage only","Edge coverage only","Node and edge coverage only","Edge pair coverage"],ans:3},
+{week:2,q:10,text:"State true or false: The test path [1,2,3,2,4] achieves edge coverage.",options:["True","False"],ans:0},
+
+// Week 3
+{week:3,q:1,text:"Which of the following represents a basic block in a control flow graph?",options:["A basic block is a set of all statements that are a part of a function","A basic block is a sequence of statements such that if the first statement is executed then all statements in sequence will also be executed"],ans:1},
+{week:3,q:2,text:"Statement 'count++;' is which of the following regarding data flow for 'count'?",options:["Definition of count","Use of count","Both definition and use","Neither"],ans:2},
+{week:3,q:3,text:"Is 'if(Math.log(x) >= 4.2)' a definition or use of x?",options:["Definition","Use"],ans:1},
+{week:3,q:4,text:"Not every definition of x will always reach a use. True/False?",options:["True","False"],ans:0},
+{week:3,q:5,text:"Which best defines a du-path for variable x?",options:["A du-path is a simple path from a definition of x to a use of x without any further definitions of x in-between","A du-path is a path from a definition of x to a use of x without any further definitions of x in-between","A du-path is a simple path from a definition of x to a use of x without any further uses","A du-path is a path from a definition of x to a use of x without any further uses"],ans:0},
+{week:3,q:6,text:"We group du-paths with respect to a variable by their definitions. Yes/No?",options:["Yes","No"],ans:0},
+{week:3,q:7,text:"Does all-du-paths data flow coverage subsume prime path coverage? Yes/No?",options:["Yes","No"],ans:1},
+{week:3,q:8,text:"Comparing source code coverage with graph based coverage: Node & statement coverage are the same, edge & branch coverage are the same. True/False?",options:["True","False"],ans:0},
+{week:3,q:9,text:"Which defines a linearly independent path of execution in CFG?",options:["A path in which there are no branches","A path which does not contain other paths within it","A path that represents structural complexity of a program","A path within a connected component"],ans:1},
+{week:3,q:10,text:"Node and edge coverage as test requirements for structural coverage over graphs are given with the input graph itself. True/False?",options:["True","False"],ans:0},
+
+// Week 4
+{week:4,q:1,text:"Which best describes a test driver?",options:["It is a special purpose implementation of a software module, used to develop or test a component that calls it.","It is a software component that replaces another component that takes care of the control and/or the calling of a software component"],ans:1},
+{week:4,q:2,text:"If method A writes v and B reads v, what coupling?",options:["Parameter coupling","Interface coupling","External coupling","Shared data coupling"],ans:3},
+{week:4,q:3,text:"To test sequencing constraints from spec, which tests are used?",options:["Tests are inputs that violate constraints","Tests are inputs that satisfy constraints","Tests are sequences of method calls as in specification","Tests are randomly generated sequencing constraints"],ans:2},
+{week:4,q:4,text:"A simple path from the last definition to the first use of a coupling variable is called...",options:["A du-path","A coupling du-path"],ans:1},
+{week:4,q:5,text:"Are control flow graphs representing code the same as finite state machines that represent the same code? True/False?",options:["Yes","No"],ans:1},
+{week:4,q:6,text:"Graph satisfying sequencing constraints: which constraints satisfied?(refer to swayam for diagram) (lecture question)",options:["All constraints are satisfied","(1)&(2) satisfied but (3)&(4) not","(1),(2),(3) satisfied but (4) not","All constraints violated"],ans:2},
+{week:4,q:7,text:"Does path (1,4,5,7) satisfy constraint (4)? True/False?(refer to swayam for diagram)",options:["True","False"],ans:1},
+{week:4,q:8,text:"Does path (1,2,3,7) satisfy all constraints? True/False?(refer to swayam for diagram)",options:["True","False"],ans:0},
+{week:4,q:9,text:"Does the path (1,4,6,7) violate any constraints? Yes/No?(refer to swayam for diagram)",options:["Yes","No"],ans:1},
+{week:4,q:10,text:"Does path (1,4,6,4,6,7) satisfy all constraints? Yes/No?(refer to swayam for diagram)",options:["Yes","No"],ans:0},
+
+// Week 5
+{week:5,q:1,text:"GACC subsumes predicate coverage. True/False?",options:["True","False"],ans:1},
+{week:5,q:2,text:"Testing to check if a clause does not determine a predicate is which coverage?",options:["Active coverage criteria","Inactive coverage criteria"],ans:1},
+{week:5,q:3,text:"Correct order of subsumption among logic coverage?",options:["Correlated active clause coverage → Predicate coverage → Clause coverage","Combinatorial coverage → Predicate coverage → Clause coverage","Combinatorial coverage → Correlated active clause coverage → Predicate coverage","General active clause coverage → Correlated active clause coverage → Clause coverage"],ans:2},
+{week:5,q:4,text:"Which represents pa, conditions under which clause a determines p?(refer to swayam for truthtable)",options:["b∧c","b∨c","¬b∨¬c","¬b∧¬c"],ans:2},
+{week:5,q:5,text:"Which represents pb, conditions under which clause b determines p?(refer to swayam for truthtable)",options:["a∧c","a∨c","¬a∧c","¬a∨¬c"],ans:2},
+{week:5,q:6,text:"Which represents pc, conditions under which clause c determines p?(refer to swayam for truthtable)",options:["¬a∧b","¬a∨b"],ans:0},
+{week:5,q:7,text:"Which represents GACC pairs for clause a?(refer to swayam for truthtable)",options:["{2,3,4}×{6,7,8}","{1,3,4}×{5,6,7}"],ans:0},
+{week:5,q:8,text:"GACC pairs for clauses b and c are the same. True/False?(refer to swayam for truthtable)",options:["True","False"],ans:1},
+{week:5,q:9,text:"The set {(2,6),(3,7),(4,8)} is the set of RACC pairs for which clause?(refer to swayam for truthtable)",options:["Clause a","Clause b"],ans:0},
+{week:5,q:10,text:"CACC pairs for clauses a,b,c are different from GACC pairs for these clauses. True/False?(refer to swayam for truthtable)",options:["True","False"],ans:1},
+
+// Week 6
+{week:6,q:1,text:"While applying logic-based testing, can predicates be taken exactly as in code always?",options:["Yes","No, sometimes we have to add extra clauses"],ans:1},
+{week:6,q:2,text:"How do logical predicates occur in finite state machines?",options:["As part of states","As guards in transitions"],ans:1},
+{week:6,q:3,text:"In requirements spec, where do logical predicates occur?",options:["Directly as part of requirements","As pre-conditions, invariants and post-conditions"],ans:1},
+{week:6,q:4,text:"Internal variable z needs to be re-written in terms of input parameters x and y. True/False?(refer to swayam for code)",options:["True","False"],ans:0},
+{week:6,q:5,text:"Is predicate coverage for first predicate subsuming for second predicate? True/False?(refer to swayam for code)",options:["True","False"],ans:1},
+{week:6,q:6,text:"How many test cases for clause coverage for second predicate if counting true/false for each clause?(refer to swayam for code)",options:["Two test cases","Four test cases"],ans:1},
+{week:6,q:7,text:"Does set {(x=5,y=3),(x=4,y=6),(x=5,y=6)} satisfy clause coverage for second predicate? True/False?(refer to swayam for code)",options:["True","False"],ans:0},
+{week:6,q:8,text:"Does the set {(x=5,y=3),(x=4,y=6),(x=5,y=6)} also satisfy predicate coverage for first and second predicates? Yes/No?(refer to swayam for code)",options:["Yes","No"],ans:0},
+{week:6,q:9,text:"How many test cases needed for satisfying RACC for all clauses for second predicate?(refer to swayam for code)",options:["Only one","Two","Three","Five"],ans:2},
+{week:6,q:10,text:"Does set {(x=4,y=6),(x=6,y=4),(x=4,y=5)} satisfy RACC for second predicate? True/False?(refer to swayam for code)",options:["True","False"],ans:0},
+
+// Week 7
+// {week:7,q:1,text:"How many partitions for input CGPA if considering only valid inputs?",options:["Three","Five"],ans:0},
+// {week:7,q:2,text:"Do inputs {8,9,9.5} belong to same partition? Yes/No?",options:["Yes","No"],ans:0},
+// {week:7,q:3,text:"Expected output for CGPA=8 test case?",options:["Eligibility for offers above INR 20,00,000 and if none, eligible for all offers","Only eligible for offers above INR 20,00,000"],ans:0},
+// {week:7,q:4,text:"A student with CGPA 6 eligible for placements for companies with salary 20,00,000? True/False?",options:["True","False"],ans:1},
+// {week:7,q:5,text:"Which partitioning of inputs is correct?",options:["Salary range: INR x to INR 20,00,000; INR 20,00,001 to INR y","Salary range: INR 0 to INR 20,00,000; ≥ INR 20,00,000","Both options above can be valid partitions","None"],ans:2},
+// {week:7,q:6,text:"Which coverage is most expressive/least expressive?",options:["All combinations least, multiple base choice most","All combinations most, multiple base choice least","Each choice most, all combinations least","Each choice least, all combinations most"],ans:3},
+// {week:7,q:7,text:"Multiple base choice coverage subsumes pair-wise coverage. True/False?",options:["True","False"],ans:1},
+// {week:7,q:8,text:"Which criterion will have maximum number of test cases?",options:["Each choice criterion","All combinations criterion","Base choice coverage","Multiple base choice coverage"],ans:1},
+// {week:7,q:9,text:"When does T-wise coverage same as all combinations?",options:["When T is maximum value in a partition","When T equals number of partitions"],ans:1},
+// {week:7,q:10,text:"While partitioning using equivalence partitioning, consider both valid and invalid inputs? Yes/No?",options:["Yes","No"],ans:0},
+
+// Week 8
+{week:8,q:1,text:"Regular expression (a+b)·(a+b)* (a+b): which list of words generated?",options:["ab, a, aab","abab, babab","aaa, bbb","All of the above"],ans:3},
+{week:8,q:2,text:"Language for same regex is:",options:["Words with at least one a and at least one b","Words with at least one a or at least one b"],ans:1},
+{week:8,q:3,text:"While parsing to extract syntactic info, which defines how characters form tokens?",options:["Regular expressions","Context-free grammars","Context-sensitive grammars","Normal form of grammar"],ans:0},
+{week:8,q:4,text:"Grammar G with productions S→aXb, X→ab: language generated?",options:["{w | w = aabb}","{w | w is of the form a^n b^n, n ≥ 1}"],ans:0},
+{week:8,q:5,text:"Is the ground string in mutation testing the same as the program under test? Yes/No?",options:["Yes","No"],ans:0},
+{week:8,q:6,text:"Which mutant can be killed by any test case?",options:["Dead mutant","Equivalent mutant","Trivial mutant","Idempotent mutant"],ans:2},
+{week:8,q:7,text:"Mutation from if(x<0 && z==5) to if(x>0 && z==5) is which operator?",options:["Replacing a logical operator","Replacing a relational operator","Replacing a decision statement","Replacing a condition statement"],ans:1},
+{week:8,q:8,text:"Replacing assignment with failOnZero() is mutation operator at which level?",options:["Program level","Integration level","Statement level","De-bugging level"],ans:0},
+{week:8,q:9,text:"Applying two or three mutation operators together to find many errors: useful?",options:["Yes","No, operators work best one at a time"],ans:1},
+{week:8,q:10,text:"Mutation testing can show program behaves identically when operation replaced/removed. True/False?",options:["True","False"],ans:0},
+
+// Week 9
+{week:9,q:1,text:"How is overloading different from overriding?",options:["Overloading occurs between methods in same class and overriding occurs between methods in a class and its descendant","Overloading occurs between a method in a class and one of its descendants and overriding occurs between two methods in same class"],ans:0},
+{week:9,q:2,text:"Which represents use of super() keyword?",options:["Sub-classes can explicitly use their parent's variables and methods using super()","Sub-classes can use their own variables and not inherited ones using super()"],ans:0},
+{week:9,q:3,text:"When deleting a method call as mutation, how is return value handled?",options:["Call deleted so caller call deleted","Value replaced with a suitable statement in caller","A message sent to caller indicating no value","Value replaced with fixed constant value"],ans:3},
+{week:9,q:4,text:"When mutation testing applied as black-box to mutate inputs, which holds?",options:["Both inputs and program mutated","Only inputs are mutated","Inputs not mutated, program mutated random statement","Inputs not mutated, program mutated in statements processing inputs"],ans:1},
+{week:9,q:5,text:"Changing is-divisible(a,b) to is-divisible(b,a) is which operator?",options:["Integration parameter variable replacement","Integration parameter variable exchange"],ans:1},
+{week:9,q:6,text:"Does Java support multiple class inheritance (so each class only has single parent)? Yes/No?",options:["Yes","No"],ans:0},
+{week:9,q:7,text:"Integration mutation operator changing order of arguments to match another overloading method is?",options:["Overloading method change","Argument number change","Argument order change","Reference type change"],ans:2},
+{week:9,q:8,text:"While testing inputs using mutation testing, inputs always have to adhere to underlying syntax? True/False?",options:["True","False"],ans:1},
+{week:9,q:9,text:"To ensure mutation testing subsumes edge coverage, which operators are used?",options:["Relational operator replacement","Statement replacement","Logical operator replacement","Condition statement replacement"],ans:0},
+{week:9,q:10,text:"To subsume all-defs coverage via mutation testing, which is true?",options:["Need strong mutation applied to statements with variable definitions","Both weak and strong mutation on statements with definitions will work"],ans:0},
+
+// Week 10
+{week:10,q:1,text:"Which features of static websites are tested using graphs?",options:["Check connections & dead links","Check correctness of information in each linked page"],ans:0},
+{week:10,q:2,text:"While testing web applications, which is true regarding client-side vs server-side testing?",options:["Client and server are separated and testers typically don't have access to server code","Testers have equal access to client and server code even though separated"],ans:0},
+{week:10,q:3,text:"Is it possible to generate all the input screens that are passed to a web application? Yes/No?",options:["Yes","No"],ans:1},
+{week:10,q:4,text:"Which techniques can provide test values to a web application?",options:["Generate values automatically","Request user to supply inputs","Random choice, user session data, construct based on domain","Generate inputs randomly and then choose based on application"],ans:2},
+{week:10,q:5,text:"Which features can be checked using HTML without extra scripting?",options:["Change of transfer mode, checking length of input and checking against list of pre-defined values","Change of transfer mode and data type of input","Checking inter-dependency of input values","Checking for length and data type"],ans:0},
+{week:10,q:6,text:"Is a control graph model useful for system level properties of web applications? Yes/No?",options:["Yes","No"],ans:0},
+{week:10,q:7,text:"Which is complete list of operators used in component expressions?",options:["Sequencing and selection","Iteration and selection","Sequencing, iteration and selection","Sequencing, iteration, selection and aggregation"],ans:3},
+{week:10,q:8,text:"What are nodes of a yo-yo graph?",options:["Nodes are classes of inheritance hierarchy","Nodes are methods of different classes, one node for each new, inherited and overridden method"],ans:1},
+{week:10,q:9,text:"What best defines edges of a yo-yo graph?",options:["Edges are method calls among methods of different classes","Edges among classes at different levels of inheritance","Edges from a caller method to a callee method","Edges are either actual method calls or calls that cannot be made due to overriding"],ans:3},
+{week:10,q:10,text:"All faults in object-oriented programs can be determined statically. True/False?",options:["True","False"],ans:1},
+
+// Week 11
+{week:11,q:1,text:"Is concolic testing a white-box testing technique? Yes/No?",options:["Yes","No"],ans:0},
+{week:11,q:2,text:"Which is true about concolic testing?",options:["Concolic testing is used instead of symbolic testing when the latter fails","Concolic testing keeps concrete state and symbolic state"],ans:1},
+{week:11,q:3,text:"What is the use of a SAT/SMT solver in symbolic testing?",options:["Solvers collect path constraints","Solvers solve path constraints and get values used as test inputs","Constraint solvers are not useful","Constraint solvers on predicates always return true or false"],ans:1},
+{week:11,q:4,text:"Symbolic execution can be used to detect non-termination in programs. True/False?",options:["True","False"],ans:1},
+{week:11,q:5,text:"Which list of techniques used in DART algorithm?",options:["Random testing, symbolic testing and constraint solvers","Symbolic testing and automated testing","Directed search, random testing and constraint solvers","Concrete testing and symbolic testing"],ans:2},
+{week:11,q:6,text:"Which strategy is used for input search in concolic testing?",options:["Random search","Systematic random search interleaved with path-sensitive search"],ans:1},
+// Common data fragment Q7-10
+{week:11,q:7,text:"What does the code fragment (swap routine) do?(refer to swayam for code)",options:["It checks if x is greater than y","It checks if y is greater than x","It swaps the values of x and y","It swaps the values of x and y twice"],ans:2},
+{week:11,q:8,text:"How many decision points and execution paths are there?(refer to swayam for code)",options:["Two decision points and three execution paths","Three decision points and four execution paths"],ans:0},
+{week:11,q:9,text:"What will be the path constraint at line 1 so program exits without further execution?(refer to swayam for code)",options:["x > y","x <= y"],ans:1},
+{week:11,q:10,text:"Is the error statement reachable in the program fragment? Yes/No?(refer to swayam for code)",options:["Yes","No"],ans:0},
+
+// Week 12
+{week:12,q:1,text:"Regression testing is a white-box testing technique as it tests for changes done to the code. True/False?",options:["True","False"],ans:1},
+{week:12,q:2,text:"When do we say a test case t is obsolete for P' (modified program)?",options:["t is obsolete if it has an input that is not valid for P'","t is obsolete if it does not produce an output on execution"],ans:0},
+{week:12,q:3,text:"Testing for non-functional or quality requirements can be done at all phases of software development. True/False?",options:["True","False"],ans:0},
+{week:12,q:4,text:"If version X (2007) can be used on version Y (2010), what indicates compatibility?",options:["X is forward compatible","X is backward compatible"],ans:0},
+{week:12,q:5,text:"File with Readonly access to all users is example of which quality requirement?",options:["Confidentiality","Reliability","Security authorization","Security authentication"],ans:2},
+{week:12,q:6,text:"Installation instructions are part of what?",options:["Software documentation","Software operations procedure","Regulatory requirements","Availability requirements"],ans:0},
+{week:12,q:7,text:"Testing to find upper limit capacity of inputs a system can handle is called?",options:["Performance testing","Load testing","Spike testing","Stress testing"],ans:3},
+{week:12,q:8,text:"Key challenges in testing mobile applications?",options:["Device fragmentation, different mobile networks, compatibility across platforms","Mobile apps different from desktop are key challenge","Mobile apps must be tested within a phone only","Testing across platforms is the only key challenge"],ans:0},
+{week:12,q:9,text:"When performance testing for mobile apps, which aspects tested for?",options:["Screen size, OS and browsers","Network coverage, memory and battery","Speed with uniform user experience","Load and stress in terms of number of users"],ans:1},
+{week:12,q:10,text:"Which interrupts are mobile apps tested for?",options:["Network coverage, memory and battery","Network outage, incoming/outgoing calls and messages"],ans:1}
+];
+
+// Build UI
+const weekSelect = document.getElementById('weekSelect');
+const weekChips = document.getElementById('weekChips');
+const modeSelect = document.getElementById('mode');
+const startBtn = document.getElementById('startBtn');
+const testArea = document.getElementById('testArea');
+const intro = document.getElementById('intro');
+const questionText = document.getElementById('questionText');
+const optionsList = document.getElementById('optionsList');
+const qIdx = document.getElementById('qIdx');
+const qTotal = document.getElementById('qTotal');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const revealBtn = document.getElementById('revealBtn');
+const submitBtn = document.getElementById('submitBtn');
+const endBtn = document.getElementById('endBtn');
+const timerEl = document.getElementById('timer');
+const scoreDisplay = document.getElementById('scoreDisplay');
+const explainArea = document.getElementById('explainArea');
+const resultArea = document.getElementById('resultArea');
+
+const WEEKS = Array.from(new Set(QUESTIONS.map(q=>q.week))).sort((a,b)=>a-b);
+// populate weekSelect and chips
+function buildWeekControls(){
+  weekSelect.innerHTML = '';
+  const optAll = document.createElement('option'); optAll.value='all'; optAll.textContent='All Weeks'; weekSelect.appendChild(optAll);
+  WEEKS.forEach(w=>{const o=document.createElement('option'); o.value=w; o.textContent='Week '+w; weekSelect.appendChild(o)});
+
+  weekChips.innerHTML='';
+  const chipAll=document.createElement('div');chipAll.className='chip active';chipAll.textContent='All Weeks';chipAll.dataset.w='all';chipAll.onclick=()=>selectChip(chipAll);weekChips.appendChild(chipAll);
+  WEEKS.forEach(w=>{const c=document.createElement('div');c.className='chip';c.textContent='Week '+w;c.dataset.w=w;c.onclick=()=>selectChip(c);weekChips.appendChild(c)});
+}
+function selectChip(c){Array.from(weekChips.children).forEach(x=>x.classList.remove('active'));c.classList.add('active');weekSelect.value=c.dataset.w;}
+buildWeekControls();
+
+let state = {
+  mode:'practice',
+  selectedWeek:'all',
+  pool:[],
+  order:[],
+  cur:0,
+  answers:[],
+  score:0,
+  timer:null,
+  timeLeft:0,
+  timeLimit:0
+};
+
+startBtn.onclick = ()=>{
+  state.mode = modeSelect.value;
+  state.selectedWeek = weekSelect.value===undefined? 'all' : weekSelect.value;
+  startTest();
+};
+
+function startTest(){
+  intro.classList.add('hide');
+  testArea.classList.remove('hide');
+  resultArea.classList.add('hide');
+  // build pool
+  let pool = QUESTIONS.filter(q=> state.selectedWeek==='all' ? true : String(q.week)===String(state.selectedWeek));
+  if(pool.length===0){alert('No questions for selected week'); return}
+  state.pool = pool;
+  // order
+  if(state.mode==='mock'){
+    // default mock size 20 or pool size
+    const n = Math.min(20, pool.length);
+    state.order = shuffle(Array.from({length:pool.length},(_,i)=>i)).slice(0,n);
+    state.timeLimit = Math.ceil(n*1.5); // 1.5 minutes per question
+    state.timeLeft = state.timeLimit*60;
+    submitBtn.classList.remove('hide'); revealBtn.classList.add('hide'); endBtn.classList.remove('hide');
+  } else {
+    state.order = Array.from({length:pool.length},(_,i)=>i);
+    state.timeLeft = 0; state.timeLimit = 0;
+    submitBtn.classList.add('hide'); revealBtn.classList.remove('hide'); endBtn.classList.add('hide');
+  }
+  state.cur = 0; state.answers = Array(state.order.length).fill(null); state.score=0;
+  qTotal.textContent = state.order.length;
+  updateScore();
+  renderQuestion();
+  if(state.mode==='mock') startTimer(); else timerEl.textContent='--:--';
+}
+
+function renderQuestion(){
+  const idx = state.cur;
+  qIdx.textContent = idx+1;
+  const qObj = state.pool[state.order[idx]];
+  questionText.textContent = `Week ${qObj.week} • Q${qObj.q}: ${qObj.text}`;
+  optionsList.innerHTML=''; explainArea.textContent='';
+  qObj.options.forEach((opt,i)=>{
+    const d=document.createElement('div');d.className='option';d.tabIndex=0;d.textContent=String.fromCharCode(65+i)+'.  '+opt;
+    d.onclick=()=>selectOption(i); if(state.answers[idx]!==null){d.classList.add('selected');}
+    optionsList.appendChild(d);
+  });
+  // if answer already chosen, mark selected
+  if(state.answers[idx]!==null){Array.from(optionsList.children)[state.answers[idx]].classList.add('selected')}
+  // in practice mode show correct immediately if chosen
+  if(state.mode==='practice' && state.answers[idx]!==null){revealAnswerFor(idx)}
+}
+
+function selectOption(i){
+  const idx = state.cur;
+  state.answers[idx]=i;
+  Array.from(optionsList.children).forEach(c=>c.classList.remove('selected'));
+  Array.from(optionsList.children)[i].classList.add('selected');
+  if(state.mode==='practice'){
+    revealAnswerFor(idx);
+  }
+}
+
+function revealAnswerFor(idx){
+  const qObj = state.pool[state.order[idx]];
+  const correct = qObj.ans;
+  Array.from(optionsList.children).forEach((el, i)=>{
+    el.classList.remove('correct','wrong');
+    if(i===correct) el.classList.add('correct');
+    if(state.answers[idx]!==null && i===state.answers[idx] && state.answers[idx]!==correct) el.classList.add('wrong');
+  });
+  explainArea.textContent = `Answer: ${String.fromCharCode(65+correct)} — ${qObj.options[correct]}`;
+}
+
+revealBtn.onclick = ()=>{revealAnswerFor(state.cur)}
+
+nextBtn.onclick = ()=>{
+  if(state.cur < state.order.length-1){ state.cur++; renderQuestion(); }
+}
+prevBtn.onclick = ()=>{
+  if(state.cur > 0){ state.cur--; renderQuestion(); }
+}
+
+submitBtn.onclick = ()=>{
+  // score
+  let correctCount = 0;
+  state.answers.forEach((a,idx)=>{ if(a!==null){ const q = state.pool[state.order[idx]]; if(a===q.ans) correctCount++; }});
+  state.score = correctCount;
+  showResults();
+  stopTimer();
+}
+
+endBtn.onclick = ()=>{ // allow ending mock early
+  if(confirm('End test early? Your current answers will be scored.')) submitBtn.onclick(); }
+
+function showResults(){
+  testArea.classList.remove('hide');
+  resultArea.classList.remove('hide');
+  const total = state.order.length; const correct = state.score;
+  resultArea.innerHTML = `<h3>Result</h3><div class='small'>Mode: ${state.mode} • Questions: ${total}</div><div style='margin-top:8px'><strong>Score: ${correct} / ${total}</strong> (${Math.round(100*correct/total)}%)</div>`;
+  // review list
+  const ul = document.createElement('div'); ul.style.marginTop='12px';
+  state.order.forEach((ord, idx)=>{
+    const q = state.pool[ord];
+    const your = state.answers[idx];
+    const correct = q.ans;
+    const row = document.createElement('div');
+    row.style.padding='8px'; row.style.borderTop='1px solid rgba(255,255,255,0.03)';
+    row.innerHTML = `<div style='font-weight:600'>${idx+1}. Week ${q.week} Q${q.q}: ${q.text}</div>
+      <div class='small'>Your answer: ${your===null? '—' : String.fromCharCode(65+your)+'. '+q.options[your]}</div>
+      <div class='small'>Correct: ${String.fromCharCode(65+correct)}. ${q.options[correct]}</div>`;
+    ul.appendChild(row);
+  });
+  resultArea.appendChild(ul);
+}
+
+function updateScore(){ scoreDisplay.textContent = 'Score: '+state.score }
+
+// Timer
+function startTimer(){ stopTimer(); state.timer = setInterval(()=>{ state.timeLeft--; if(state.timeLeft<=0){ clearInterval(state.timer); timerEl.textContent='00:00'; alert('Time is up — test will be submitted.'); submitBtn.onclick(); } else { timerEl.textContent = formatTime(state.timeLeft); } },1000); timerEl.textContent = formatTime(state.timeLeft);} 
+function stopTimer(){ if(state.timer) clearInterval(state.timer); state.timer=null; }
+function formatTime(s){ const mm = Math.floor(s/60).toString().padStart(2,'0'); const ss = (s%60).toString().padStart(2,'0'); return mm+':'+ss }
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a }
+
+// small helper: clicking weekSelect updates chip
+weekSelect.onchange = ()=>{ const val = weekSelect.value; Array.from(weekChips.children).forEach(c=>{ if(c.dataset.w==val) c.classList.add('active'); else c.classList.remove('active'); }); }
+
+// initial
+qTotal.textContent = '0'; qIdx.textContent='0';
+
+</script>
+</body>
+</html>
