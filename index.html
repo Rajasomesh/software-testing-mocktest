@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Software Testing — Mock Test & Practice (Full)</title>
+  <title>Software Testing — Mock Test & Practice</title>
   <style>
     :root {
       --bg:#0f1724;
@@ -74,7 +74,7 @@
     <header>
       <div>
         <h1>Software Testing — Mock Test & Practice</h1>
-        <div class="small">Questions & answers from provided PDF — practice mode & timed mock tests.</div>
+        <div class="small">Questions & answers from Software Testing course — practice mode & timed mock tests.</div>
       </div>
       <div class="controls">
         <label class="small">Mode:</label>
@@ -128,11 +128,9 @@
     </div>
   </div>
 
-<script>
-// Full QUESTIONS array (Weeks 0 - 12). Note: Week-7 Q1 includes a long description and a newline before "How".
+  <script>
 const QUESTIONS = [
-// Week 0
-{week:0, q:1, text:"In the classical waterfall software development lifecycle, when is testing done?", options:["Along with coding.","After complete coding is done.","Coding and testing are repeated one after another.","After complete coding and integration with system."], ans:1},
+{week:0,q:1,text:"In the classical waterfall software development lifecycle, when is testing done?",options:["Along with coding.","After complete coding is done.","Coding and testing are repeated one after another.","After complete coding and integration with system."],ans:1},
 {week:0,q:2,text:"In Agile methodologies for software development, when is testing done?",options:["Testing is done along with coding by developers.","Testing is done along with coding by testers.","Testing is done after coding by developers.","Testing is done after coding by testers."],ans:0},
 {week:0,q:3,text:"Which of the following best defines black box testing?",options:["Testing done on the entire software.","Testing done to exercise parts of the software.","Testing done based on requirements only.","Testing done based on the structure of the software."],ans:2},
 {week:0,q:4,text:"What is regression testing?",options:["Testing done each time code is modified to ensure that the newly added code works as expected along with the existing code.","Testing done on the entire code each time a part of it is modified.","Testing done on the entire code after release, for each modification.","Testing done by customer on the newly added features in the code."],ans:0},
@@ -142,153 +140,128 @@ const QUESTIONS = [
 {week:0,q:8,text:"Which testing technique listed below uses relational and logical operators?",options:["Testing for functionality.","Testing based on inputs and expected outputs.","Testing for execution of decision statements in code.","Testing for execution of decisions and loops in code."],ans:3},
 {week:0,q:9,text:"State true or false: While testing web applications, both client side and server side testing is done.",options:["True.","False."],ans:0},
 {week:0,q:10,text:"Which of the following constitutes non-functional testing?",options:["Performance testing.","Black-box testing.","White-box testing.","Integration testing."],ans:0},
-
-// Week 1
-{week:1,q:1,text:"Suppose a method M1 calls M2, which calls M3. The level of testing that tests the interface of calls from M1 to M2 to M3 is called...",options:["Functional testing","Unit testing","Integration testing","System testing"],ans:2},
-{week:1,q:2,text:"A coverage criterion C1 is said to subsume C2 if there is at least one test case that satisfies C1 which also satisfies C2. True or False?",options:["True","False"],ans:1},
-{week:1,q:3,text:"Testing can be used to find all the errors in code. True/False?",options:["True","False"],ans:1},
-{week:1,q:4,text:"Which are practised in level 3 thinking during testing?",options:["Testing is a mental discipline, everyone in an organization strives to test thoroughly","Testing is done mainly by developers, to debug their code","Testing is done to identify failures and reduce risks","Testing is done to show absence of errors"],ans:2},
-{week:1,q:5,text:"Which best defines usability testing?",options:["Testing done to ensure software looks nice","Testing done to ensure the software is usable by all users","Testing done to understand how users can use a software","Testing done to ensure the user interface is as specified in the requirements"],ans:3},
+{week:1,q:1,text:"Choose the right option to fill in the blank: Suppose a method M1 calls a method M2, which in turn, calls another method M3. The level of testing that tests for the interface of calls from M1 to M2 and then to M3 is called as …",options:["Functional testing","Unit testing","Integration testing","System testing"],ans:2},
+{week:1,q:2,text:"State true or false: A coverage criterion C1 is said to subsume another coverage criterion C2 if there is at least one test case that satisfies C1 which also satisfies C2.",options:["True","False"],ans:1},
+{week:1,q:3,text:"State true or false: Testing can be used to find all the errors in code.",options:["True","False"],ans:1},
+{week:1,q:4,text:"Which of the following are practised in level 3 thinking during testing?",options:["Testing is a mental discipline, everyone in an organization strives to test thoroughly","Testing is done mainly by developers, to debug their code","Testing is done to identify failures and reduce risks","Testing is done to show absence of errors"],ans:2},
+{week:1,q:5,text:"Which of the following best defines usability testing?",options:["Testing done to ensure that the software looks nice","Testing done to ensure that the software is usable by all the users","Testing done to understand how users can use a software","Testing done to ensure that the user interface of the software is as specified in the requirements"],ans:3},
 {week:1,q:6,text:"Which of the following is a list of white-box testing techniques?",options:["Unit testing, performance testing","Integration testing, stress testing","Unit testing, integration testing","Usability testing, performance testing"],ans:2},
-{week:1,q:7,text:"Which sentence best defines a test case?",options:["A test case contains only inputs to the software artifact","A test case contains inputs to the software artifact along with the expected outputs","A test case contains inputs and a decision on pass or fail","A test case contains inputs and the actual output is also recorded"],ans:1},
-{week:1,q:8,text:"When does a set of test cases T satisfy the test requirements TR for a coverage criterion C?",options:["For every test requirement tr ∈ TR, there is exactly one test case t ∈ T such that t satisfies tr","For some test requirement tr ∈ TR, there is some test case t ∈ T such that t satisfies tr","For some test requirement tr ∈ TR, all the test cases t ∈ T are such that t satisfies tr","For every test requirement tr ∈ TR, there is at least one test case t ∈ T such that t satisfies tr"],ans:3},
-{week:1,q:9,text:"When do we say that a coverage criterion C1 subsumes C2?",options:["C1 subsumes C2 iff some test case that satisfies C1 also satisfies C2","C1 subsumes C2 iff every test case that satisfies C1 also satisfies C2"],ans:1},
-{week:1,q:10,text:"What does JUnit assertFalse(val1 > val2) return when val1 is less than val2?",options:["True","False"],ans:0},
+{week:1,q:7,text:"As per the lectures, which of the following sentences best defines a test case?",options:["A test case contains only inputs to the software artifact","A test case contains inputs to the software artifact along with the expected outputs","A test case contains inputs to the software artifact and a decision on pass or fail","A test case contains inputs to the software artifact, which is run and the actual output is also recorded as a part of the test case"],ans:1},
+{week:1,q:8,text:"When do we say that a set of test cases T satisfies the test requirements TR for a coverage criterion C?",options:["For every test requirement tr ∈ TR, there is exactly one test case t ∈ T such that t satisfies tr","For some test requirement tr ∈ TR, there is some test case t such that t ∈ T such that t satisfies tr","For some test requirement tr ∈ TR, all the test cases t ∈ T are such that t satisfies tr","For every test requirement tr ∈ TR, there is at least one test case t ∈ T such that t satisfies tr"],ans:3},
+{week:1,q:9,text:"When do we say that a coverage criterion C1 subsumes a coverage criterion C2?",options:["C1 subsumes C2 iff some test case that satisfies C1 also satisfies C2","C1 subsumes C2 iff every test case that satisfies C1 also satisfies C2"],ans:1},
+{week:1,q:10,text:"What does the JUnit assertion assertFalse(val1 > val2) return when val1 is less than val2?",options:["True","False"],ans:0},
+{week:2,q:1,text:"Which of the following best defines an infeasible test path?",options:["An infeasible test path is one that does not exist in the graph","An infeasible test path is one that can be executed by a failed test case","An infeasible test path is one that cannot be executed by any test case","An infeasible test path is one that does not start at an initial vertex or end at a final vertex"],ans:2},
+{week:2,q:2,text:"How are test requirements defined and met in graphs-based structural coverage criteria?",options:["Test requirements are basically the same as test paths, they are given as test paths","Test requirements are defined as properties of test paths and they are met by using test paths that satisfy each test requirement"],ans:1},
+{week:2,q:3,text:"In control flow graphs, which of the terms below represents a basic block?",options:["A basic block is a sequence of statements such that there is no branching in the sequence","A basic block is any sequence of statements that occurs as a path in the control flow graph"],ans:0},
+{week:2,q:4,text:"Consider a control flow graph G corresponding to a method and a strongly connected component S in C. Which of the following does S represent in the code that G corresponds to?",options:["S represents the entire method in case the method does not have loops","S represents a loop in the method"],ans:1},
+{week:2,q:5,text:"Which of the algorithms will return the shortest paths between two nodes in a control flow graph?",options:["Breadth first search","Depth first search"],ans:0},
+{week:2,q:6,text:"State true or false: There are test paths that achieve node coverage but not edge coverage.",options:["True","False"],ans:0},
+{week:2,q:7,text:"Which of the following test paths achieve edge coverage?",options:["Test path [1, 2, 3, 2, 4]","Test paths [1, 2, 4] and [1, 2, 3, 2]","Both the paths above achieve edge coverage","None of the above two paths achieve edge coverage"],ans:0},
+{week:2,q:8,text:"State yes or no: In the graph above, the test path [1, 2, 3, 2, 4] tours the pair of edges [3, 2, 3].",options:["Yes","No"],ans:1},
+{week:2,q:9,text:"The test paths {[1, 2, 4], [1, 2, 3, 2, 3, 2, 4]} achieve which of the following coverage criteria?",options:["Node coverage only","Edge coverage only","Node and edge coverage only","Edge pair coverage"],ans:3},
+{week:2,q:10,text:"State true or false: The test path [1, 2, 3, 2, 4] achieves edge coverage.",options:["True","False"],ans:0},
+{week:3,q:1,text:"Which of the following represents a basic block in a control flow graph?",options:["A basic block of statements is a set of all statements that are a part of a function that the control flow graph represents","A basic block of statements is a sequence of statements such that if the first statement the sequence is executed then all the statements in the sequence will also be executed"],ans:1},
+{week:3,q:2,text:"Consider a variable count of type int. Suppose there is a method that has a statement of the type count++;. Which of the following statements are correct regarding the data flow definition of count?",options:["The statement is a definition of count","The statement is a use of count","The statement is both a definition and use of count","The statement is neither a definition nor a use of count"],ans:2},
+{week:3,q:3,text:"Consider a variable x of type double and suppose a particular method in Java has a statement if(Math.log(x)) >= 4.2, will it be considered a definition of x or a use of x?",options:["The statement is a definition of x","The statement is a use of x"],ans:1},
+{week:3,q:4,text:"State true or false: Consider a variable x in a program. Not every definition of x will always reach a use.",options:["True","False"],ans:0},
+{week:3,q:5,text:"Which of the following best defines a du-path for a variable x?",options:["A du-path is a simple path from a definition of x to a use of x without any further definitions of x in-between","A du-path is a path from a definition of x to a use of x without any further definitions of x in-between","A du-path is a simple path from a definition of x to a use of x without any further uses of x in-between","A du-path is a path from a definition of x to a use of x without any further uses of x in-between"],ans:0},
+{week:3,q:6,text:"State yes or no: We group du-paths with respect to a variable by their definitions.",options:["Yes","No"],ans:0},
+{week:3,q:7,text:"Is it true that the all-du-paths data flow coverage criterion subsumes prime path coverage?",options:["Yes","No"],ans:1},
+{week:3,q:8,text:"Which of the following statements are true when it comes to comparing traditional source code coverage criteria with graph based coverage criteria?",options:["Node and statement coverage are the same, edge and branch coverage are the same","Edge and decision coverage are the same"],ans:0},
+{week:3,q:9,text:"Which of the following defines a linearly independent path of execution in a control flow graph?",options:["A path in which there are no branches","A path which does not contain other paths within it","A path that represents structural complexity of a program","A path within a connected component"],ans:1},
+{week:3,q:10,text:"State true or false: Node and edge coverage, as test requirements for structural coverage over graphs, are given with the input graph itself.",options:["True","False"],ans:0},
+{week:4,q:1,text:"Which of the following best describes a test driver?",options:["It is a special purpose implementation of a software module, used to develop or test a component that calls it.","It is a software component that replaces another component that takes care of the control and/or the calling of a software component"],ans:1},
+{week:4,q:2,text:"If method A uses a variable v shared with method B, where A writes to v and B reads from v, then, it is an example of which kind of coupling interface listed below?",options:["Parameter coupling","Interface coupling","External coupling","Shared data coupling"],ans:3},
+{week:4,q:3,text:"To test sequencing constraints that occur as requirements specification, which of the following tests are used?",options:["Tests are inputs to sequencing constraints that violate the constraints","Tests are inputs to sequencing constraints that satisfy the constraints","Tests are sequences of method calls, as they occur in the specification","Tests are randomly generated sequencing constraints"],ans:2},
+{week:4,q:4,text:"A simple path from the last definition to the first use of a coupling variable is called as . . .",options:["A du-path","A coupling du-path"],ans:1},
+{week:4,q:5,text:"State Yes or No: Are control flow graphs representing code the same as finite state machines that represent the same code?",options:["Yes","No"],ans:1},
+{week:4,q:6,text:"Which of the following is true with reference to the graph satisfying the sequencing constraints?",options:["All the sequencing constraints are satisfied","Constraints (1) and (2) are satisfied but (3) and (4) are not","Constraints (1), (2) and (3) are satisfied but (4) is not","All constraints are violated"],ans:2},
+{week:4,q:7,text:"State true or false: The path (1,4,5,7) satisfies constraint (4).",options:["True","False"],ans:1},
+{week:4,q:8,text:"State true or false: The path (1,2,3,7) satisfies all the constraints.",options:["True","False"],ans:0},
+{week:4,q:9,text:"State yes or no: Does the path (1,4,6,7) violate any of the constraints?",options:["Yes","No"],ans:1},
+{week:4,q:10,text:"State true or false: The path (1,4,6,4,6,7) satisfies all the constraints.",options:["Yes","No"],ans:0},
+{week:5,q:1,text:"State true or false: GACC subsumes predicate coverage.",options:["True","False"],ans:1},
+{week:5,q:2,text:"When we test to check if a particular clause does not determine a predicate, which kind of coverage criteria are we considering?",options:["Active coverage criteria","Inactive coverage criteria"],ans:1},
+{week:5,q:3,text:"Which of the following represents a correct order of subsumption amongst logic coverage criteria? In the options below, read → as 'subsumes'.",options:["Correlated active clause coverage → Predicate coverage → Clause coverage","Combinatorial coverage → Predicate coverage → Clause coverage","Combinatorial coverage → Correlated active clause coverage → Predicate coverage","General active clause coverage → Correlated active clause coverage → Clause coverage"],ans:2},
+{week:5,q:4,text:"Which of the following represents pa, the conditions under which clause a determines p?",options:["b∧c","b∨c","¬b∨¬c","¬b∧¬c"],ans:2},
+{week:5,q:5,text:"Which of the following represents pb, the conditions under which clause b determines p?",options:["a∧c","a∨c","¬a∧c","¬a∨¬c"],ans:2},
+{week:5,q:6,text:"Which of the following represents pc, the conditions under which clause c determines p?",options:["¬a∧b","¬a∨b"],ans:0},
+{week:5,q:7,text:"Which of the following represents GACC pairs for clause a?",options:["{2,3,4}×{6,7,8}","{1,3,4}×{5,6,7}"],ans:0},
+{week:5,q:8,text:"State true or false: GACC pairs for clauses b and c are the same.",options:["True","False"],ans:1},
+{week:5,q:9,text:"The set {(2,6),(3,7),(4,8)} is the set of RACC pairs for which clause?",options:["Clause a","Clause b"],ans:0},
+{week:5,q:10,text:"State true or false: CACC pairs for clauses a, b and c are different from GACC pairs for these clauses.",options:["True","False"],ans:1},
+{week:6,q:1,text:"While applying logic-based testing to test source code, is it true that the predicates can be taken exactly as they occur in code always?",options:["Yes, the predicates can be considered exactly as they occur in code","No, sometimes we have to add extra clauses to the predicate"],ans:1},
+{week:6,q:2,text:"How do logical predicates occur in finite state machines?",options:["The logical predicates occur as a part of the states of the finite state machines","The logical predicates occur as guards in the transitions of the finite state machines"],ans:1},
+{week:6,q:3,text:"In a requirements specification document, where do logical predicates occur?",options:["They occur directly as a part of the requirements","They occur as pre-conditions, invariants and post-conditions in the requirements","All the conditions in requirements can be translated into predicates","Logical predicates cannot be found in requirements"],ans:1},
+{week:6,q:4,text:"State true or false: The internal variable z in the second predicate needs to be re-written in terms of the input parameters x and y.",options:["True","False"],ans:0},
+{week:6,q:5,text:"Is it true that predicate coverage for the first predicate will also subsume predicate coverage for the second predicate?",options:["True","False"],ans:1},
+{week:6,q:6,text:"How many test cases will be needed for clause coverage for the second predicate if we explicitly count the true and false values for each clause?",options:["Two test cases","Four test cases"],ans:1},
+{week:6,q:7,text:"State true or false: The set of test case inputs {(x=5,y=3),(x=4,y=6),(x=5,y=6)} will satisfy clause coverage for the second predicate.",options:["True","False"],ans:0},
+{week:6,q:8,text:"State yes or no: The set of test case inputs {(x=5,y=3),(x=4,y=6),(x=5,y=6)} will also satisfy predicate coverage for the first and second predicates.",options:["Yes","No"],ans:0},
+{week:6,q:9,text:"How many test cases are needed for satisfying RACC for all the clauses for the second predicate?",options:["Only one test case","Two test cases","Three test cases","Five test cases"],ans:2},
+{week:6,q:10,text:"State true or false: The set of test case inputs {(x=4,y=6),(x=6,y=4),(x=4,y=5)} satisfy RACC for the second predicate.",options:["True","False"],ans:0},
+{week:7,q:1,text:"How many partitions will be there for the input CGPA if we consider only valid inputs?",options:["Three partitions","Five partitions"],ans:0},
+{week:7,q:2,text:"Do the test inputs {CGPA = 8, CGPA = 9, CGPA = 9.5} belong to the same partition?",options:["Yes, they belong to the same partition","No, they belong to different partitions"],ans:0},
+{week:7,q:3,text:"What is the expected output for the test case containing CGPA = 8 as input?",options:["Eligibility for offers above INR 20,00,000/= per annum and if no such offers exist, eligible for all offers","Only eligible for offers above INR 20,00,000/= per annum"],ans:0},
+{week:7,q:4,text:"State true or false: A student has a CGPA of 6 and will be eligible to appear for placements for companies with a salary offer of INR 20,00,000/=",options:["True","False"],ans:1},
+{week:7,q:5,text:"Which of the following is a correct partitioning of inputs?",options:["Salary range: 1. INR x to INR 20,00,000, 2. INR 20,00,001 to INR y where x is the minimum salary offered and y is the maximum salary offered","Salary range: 1. INR 0 to INR 20,00,000, 2. ≥ INR 20,00,000","Both the options above can be valid partitions","None of the options above are valid partitions"],ans:2},
+{week:7,q:6,text:"Amongst the various coverage criteria for input space partitioning, which is the most expressive and which is the least expressive?",options:["All combinations coverage is the least expressive and multiple base choice coverage is the most expressive","All combinations coverage is the most expressive and multiple base choice coverage is the least expressive","Each choice coverage is the most expressive and all combinations coverage is the least expressive","Each choice coverage is the least expressive and all combinations coverage is the most expressive"],ans:3},
+{week:7,q:7,text:"State true or false: Multiple base choice coverage subsumes pair-wise coverage",options:["True","False"],ans:1},
+{week:7,q:8,text:"Which criterion below will have a maximum number of test cases?",options:["Each choice criterion","All combinations criterion","Base choice coverage criterion","Multiple base choice coverage criterion"],ans:1},
+{week:7,q:9,text:"When does T-wise coverage criterion become the same as all combinations coverage criterion?",options:["When the value for T is the maximum value in a partition","When the value for T is equal to the number of partitions"],ans:1},
+{week:7,q:10,text:"State yes or no: While partitioning the inputs using equivalence partitioning, both valid and invalid inputs need to be considered",options:["Yes","No"],ans:0},
+{week:8,q:1,text:"Consider the regular expression (a+b)⋅(a+b)* over the alphabet Σ={a,b}. Which of the following options represents a list of words generated by this regular expression?",options:["ab, a, aab","abab, babab","aaa, bbb","All of the above"],ans:3},
+{week:8,q:2,text:"For the same regular expression (a+b)⋅(a+b)*, which of the following represents the language corresponding to the regular expression?",options:["The language is the set of all words over a and b that have at least one a and at least one b in them","The language is the set of all words over a and b that have at least one a or at least one b in them"],ans:1},
+{week:8,q:3,text:"While parsing a program to extract syntactic information, which of the following defines how characters form tokens?",options:["Regular expressions","Context-free grammars","Context-sensitive grammars","The normal form of the grammar"],ans:0},
+{week:8,q:4,text:"Consider the context-free grammar given by G=(N,T,P,S) where N={S,X}, T={a,b}, P={S→aXb, X→ab}. Which of the following is the language generated by this grammar?",options:["The language generated by G is {w | w = aabb}","The language generated by G is {w | w is of the form aⁿbⁿ, n ≥ 1}"],ans:0},
+{week:8,q:5,text:"State yes or no: Is the ground string in mutation testing the same as the program under test?",options:["Yes","No"],ans:0},
+{week:8,q:6,text:"Which of the following is a mutant that can be killed by any test case?",options:["Dead mutant","Equivalent mutant","Trivial mutant","Idempotent mutant"],ans:2},
+{week:8,q:7,text:"Suppose a decision statement like if (x < 0 && z == 5) is mutated to if (x > 0 && z == 5). Then it is an example of which kind of mutation operator?",options:["Replacing a logical operator","Replacing a relational operator","Replacing a decision statement","Replacing a condition statement"],ans:1},
+{week:8,q:8,text:"As per the lectures, replacing a particular assignment statement with a statement like failOnZero() is an example of a mutation operator applied at which of the levels in testing?",options:["Program level","Integration level","Statement level","De-bugging level"],ans:0},
+{week:8,q:9,text:"A programmer decides to save time and apply two or three mutation operators together to increase the chances of finding many errors together. Is this considered to be a useful strategy in mutation testing?",options:["Yes, it will find many errors early","No, mutation operators work best when applied one at a time"],ans:1},
+{week:8,q:10,text:"State true or false: Mutation testing can be used to show that a program behaves identically when a particular operation is replaced or removed.",options:["True","False"],ans:0},
+{week:9,q:1,text:"How is overloading different from overriding in object-oriented programming?",options:["Overloading occurs between two methods in the same class and overriding occurs between methods in a class and one of its descendants","Overloading occurs between a method in a class and one of its descendants and overriding occurs between two methods in the same class"],ans:0},
+{week:9,q:2,text:"Which of the following represents use of super() keyword?",options:["Sub-classes can explicitly use their parent's variables and methods using the keyword super()","Sub-classes can use their own variables and methods and not the inherited ones using the keyword super()"],ans:0},
+{week:9,q:3,text:"While applying the mutation operator that deletes a method call, how is the value to be returned by the deleted method passed back to the caller method?",options:["The method itself is deleted, so the call should also be deleted in the caller method","The value returned by the deleted method is replaced with a suitable statement in the caller","A message is sent to the caller indicating that there is no value to be returned as the method is deleted","The value returned by the deleted method is replaced with a fixed, constant value"],ans:3},
+{week:9,q:4,text:"When mutation testing is applied as a black-box testing technique to mutate the inputs, which of the following statements hold true?",options:["Both the inputs and the program which is accepting the inputs have to be mutated with one mutation operator","Only the inputs are mutated, the program which is accepting the inputs remains the same","The inputs are not mutated, the program is mutated at a random statement","The inputs are not mutated, the program is mutated at one of the statements that process the inputs"],ans:1},
+{week:9,q:5,text:"When we change a method call is-divisible(a,b) to is-divisible(b,a) is an example of which of the mutation operators listed below?",options:["Integration parameter variable replacement","Integration parameter variable exchange"],ans:1},
+{week:9,q:6,text:"State yes or no: The programming language Java does not support multiple class inheritance and hence each class only has a single parent.",options:["Yes","No"],ans:0},
+{week:9,q:7,text:"Which of the following integration mutation operator represents changing the order of arguments in method invocations to be the same as that of another overloading method, if one exists?",options:["Overloading method change","Argument number change","Argument order change","Reference type change"],ans:2},
+{week:9,q:8,text:"State true or false: While testing inputs using mutation testing, the inputs always have to adhere to their underlying syntax.",options:["True","False"],ans:1},
+{week:9,q:9,text:"Towards ensuring that mutation testing subsumes edge coverage, which of the following mutation operators are used?",options:["Relational operator replacement","Statement replacement","Logical operator replacement","Condition statement replacement"],ans:0},
+{week:9,q:10,text:"Which of the statements below are true with reference to mutation testing subsuming all-defs coverage?",options:["We need to consider strong mutation to be applied to the statements that contain variable definitions","Both weak and strong mutation on the statements that contain variable definitions will work"],ans:0},
+{week:10,q:1,text:"Which of the following features of static websites are tested using graphs?",options:["We check if all the connections are valid and if there are any dead links","We check if all the information given is correct in each of the linked web pages"],ans:0},
+{week:10,q:2,text:"While testing web applications, which of the following is true regarding client-side vs. server-side testing?",options:["Client and server are separated and testers typically don't have access to the server code","Testers have equal access to the client code and server code even though they are separated"],ans:0},
+{week:10,q:3,text:"State yes or no: It is possible to generate all the input screens that are passed to a web application.",options:["Yes","No"],ans:1},
+{week:10,q:4,text:"Which of the following is a list of techniques that can be used to provide test values to a web application?",options:["Generate values automatically using an appropriate algorithm","Request user to supply inputs","Random choice, user session data, construct based on the domain of application","Generate inputs randomly and then choose based on the application"],ans:2},
+{week:10,q:5,text:"Which of the following features can be checked using HTML without the need to write extra scripting constraints?",options:["Change of transfer mode, checking for length of input and checking against a list of pre-defined values","Change of transfer mode and change of data type of input","Checking of inter-dependency of input values","Checking for length of input and also the data type"],ans:0},
+{week:10,q:6,text:"Is a control graph model useful for testing system level properties of web applications?",options:["Yes","No"],ans:0},
+{week:10,q:7,text:"Which of the following is a complete list of operators that are used in component expressions?",options:["Sequencing and selection","Iteration and selection","Sequencing, iteration and selection","Sequencing, iteration, selection and aggregation"],ans:3},
+{week:10,q:8,text:"Which of the following defines the nodes of a yo-yo graph?",options:["Nodes of a yo-yo graph are the classes of the inheritance hierarchy","Nodes of a yo-yo graph are the methods of different classes, one node for each of the new, inherited and overridden methods"],ans:1},
+{week:10,q:9,text:"Which of the following best defines the edges of a yo-yo graph?",options:["Edges of a yo-yo graph are the method calls among methods of different classes","Edges of a yo-yo graph are among classes at different levels of inheritance","Edges of a yo-yo graph are from a caller method to a callee method","Edges of a yo-yo graph are either the actual method calls or the calls that cannot be made due to overriding"],ans:3},
+{week:10,q:10,text:"State true or false: All the faults in object-oriented programs can be determined statically.",options:["True","False"],ans:1},
+{week:11,q:1,text:"State yes or no: Is concolic testing a white-box testing technique?",options:["Yes","No"],ans:0},
+{week:11,q:2,text:"Which of the following is true about concolic testing?",options:["Concolic testing is used instead of symbolic testing when the latter fails","Concolic testing keeps concrete state and symbolic state"],ans:1},
+{week:11,q:3,text:"What is the use of a SAT/SMT solver in symbolic testing?",options:["SAT/SMT solvers are used to collect path constraints in symbolic testing","SAT/SMT solvers are used to solve path constraints and get values that can be used as test inputs","Constraint solvers are not useful in symbolic testing as not all path constraints can be collected and solved","Constraint solvers on predicates always return true or false values which helps to decide the execution paths"],ans:1},
+{week:11,q:4,text:"State true or false: Symbolic execution can be used to detect non-termination in programs.",options:["True","False"],ans:1},
+{week:11,q:5,text:"Which of the following is a list of techniques used in the algorithm deployed by DART?",options:["Random testing, symbolic testing and constraint solvers","Symbolic testing and automated testing","Directed search, random testing and constraint solvers","Concrete testing and symbolic testing"],ans:2},
+{week:11,q:6,text:"Which of the following strategy is used for input search in concolic testing?",options:["Random search","Systematic, random search interleaved with path-sensitive search"],ans:1},
+{week:11,q:7,text:"What does the code fragment do?",options:["It checks if x is greater than y","It checks if y is greater than x","It swaps the values of x and y","It swaps the values of x and y twice"],ans:2},
+{week:11,q:8,text:"How many decision points and execution paths are there in the code fragment?",options:["Two decision points and three execution paths","Three decision points and four execution paths"],ans:0},
+{week:11,q:9,text:"What will be the path constraint at line 1 of the code fragment such that program exits without further execution?",options:["x > y","x <= y"],ans:1},
+{week:11,q:10,text:"State yes or no: Is the error statement reachable in the given program fragment?",options:["Yes","No"],ans:0},
+{week:12,q:1,text:"State true or false: Regression testing is a white-box testing technique as it tests for the changes done to the code.",options:["True","False"],ans:1},
+{week:12,q:2,text:"Let P be a program and let P′ be a modified version of P. When do we say that a particular test case t is obsolete for P′?",options:["Test case t is obsolete for P′ if it has an input that is not valid for P′.","Test case t is obsolete for P′ if it does not produce an output on execution."],ans:0},
+{week:12,q:3,text:"State true or false: Testing for non-functional or quality requirements can be done at all the phases of software development.",options:["True","False"],ans:0},
+{week:12,q:4,text:"If a software application version X released in the year 2007 can be used on version Y of the same application released in the year 2010, what does it indicate regarding its compatibility?",options:["The application X is forward compatible.","The application X is backward compatible."],ans:0},
+{week:12,q:5,text:"If a particular file available in a particular web link is set to have \"Readonly\" access to all the users, then, it is an example of which kind of quality requirement?",options:["It is an example of a confidentiality requirement.","It is an example of a reliability requirement.","It is an example of a security authorization requirement.","It is an example of a security authentication requirement."],ans:2},
+{week:12,q:6,text:"Installation instructions are made available as a part of the software package. What are these instructions a part of?",options:["They are a part of the software documentation.","They are a part of the software operations procedure.","They are a part of the regulatory requirements for the software.","They are a part of the availability requirements of the software."],ans:0},
+{week:12,q:7,text:"Which of the following terms represents the testing that is done to find the upper limit capacity of the inputs that a particular system can handle?",options:["Performance testing","Load testing","Spike testing","Stress testing"],ans:3},
+{week:12,q:8,text:"Which of the following is a list of key challenges in testing of mobile applications?",options:["Device fragmentation, different mobile networks, compatibility across platforms.","Key challenge is related to mobile applications being different from that of desktop applications.","Mobile applications have to be tested within a mobile phone only, this is the key challenge.","Testing across platforms is the only key challenge."],ans:0},
+{week:12,q:9,text:"When performance testing is considered for mobile applications, which of the following aspects are tested for?",options:["Screen size, operating systems and browsers.","Network coverage, memory and battery.","Speed with uniform user experience.","Load and stress in terms of the number of users."],ans:1},
+{week:12,q:10,text:"Which of the following is a list of interrupts that mobile applications are tested for?",options:["Network coverage, memory and battery.","Network outage, incoming/outgoing calls and messages."],ans:1}
+];
 
-// Week 2
-{week:2,q:1,text:"Which best defines an infeasible test path?",options:["An infeasible test path is one that does not exist in the graph","An infeasible test path is one that can be executed by a failed test case","An infeasible test path is one that cannot be executed by any test case","An infeasible test path is one that does not start at an initial vertex or end at a final vertex"],ans:2},
-{week:2,q:2,text:"How are test requirements defined and met in graphs-based structural coverage criteria?",options:["Test requirements are basically the same as test paths","Test requirements are defined as properties of test paths and met by using test paths that satisfy each test requirement"],ans:1},
-{week:2,q:3,text:"In control flow graphs, which term represents a basic block?",options:["A basic block is a sequence of statements such that there is no branching in the sequence","A basic block is any sequence of statements that occurs as a path in the control flow graph"],ans:0},
-{week:2,q:4,text:"A strongly connected component S in a CFG represents what in code?",options:["S represents the entire method if method has no loops","S represents a loop in the method"],ans:1},
-{week:2,q:5,text:"Which algorithm returns shortest paths between two nodes in a CFG? (refer to swayam for diagram)",options:["Breadth first search","Depth first search"],ans:0},
-{week:2,q:6,text:"There are test paths that achieve node coverage but not edge coverage. True/False?",options:["True","False"],ans:0},
-{week:2,q:7,text:"Which test path achieves edge coverage? (example)",options:["Test path [1,2,3,2,4]","Test paths [1,2,4] and [1,2,3,2]","Both the paths above","None"],ans:0},
-{week:2,q:8,text:"Does the test path [1,2,3,2,4] tour the pair of edges [3,2,3]? Yes/No",options:["Yes","No"],ans:1},
-{week:2,q:9,text:"The test paths {[1,2,4],[1,2,3,2,3,2,4]} achieve which coverage?",options:["Node coverage only","Edge coverage only","Node and edge coverage only","Edge pair coverage"],ans:3},
-{week:2,q:10,text:"State true or false: The test path [1,2,3,2,4] achieves edge coverage.",options:["True","False"],ans:0},
-
-// Week 3
-{week:3,q:1,text:"Which of the following represents a basic block in a control flow graph?",options:["A basic block is a set of all statements that are a part of a function","A basic block is a sequence of statements such that if the first statement is executed then all statements in sequence will also be executed"],ans:1},
-{week:3,q:2,text:"Statement 'count++;' is which of the following regarding data flow for 'count'?",options:["Definition of count","Use of count","Both definition and use","Neither"],ans:2},
-{week:3,q:3,text:"Is 'if(Math.log(x) >= 4.2)' a definition or use of x?",options:["Definition","Use"],ans:1},
-{week:3,q:4,text:"Not every definition of x will always reach a use. True/False?",options:["True","False"],ans:0},
-{week:3,q:5,text:"Which best defines a du-path for variable x?",options:["A du-path is a simple path from a definition of x to a use of x without any further definitions of x in-between","A du-path is a path from a definition of x to a use of x without any further definitions of x in-between","A du-path is a simple path from a definition of x to a use of x without any further uses","A du-path is a path from a definition of x to a use of x without any further uses"],ans:0},
-{week:3,q:6,text:"We group du-paths with respect to a variable by their definitions. Yes/No?",options:["Yes","No"],ans:0},
-{week:3,q:7,text:"Does all-du-paths data flow coverage subsume prime path coverage? Yes/No?",options:["Yes","No"],ans:1},
-{week:3,q:8,text:"Comparing source code coverage with graph based coverage: Node & statement coverage are the same, edge & branch coverage are the same. True/False?",options:["True","False"],ans:0},
-{week:3,q:9,text:"Which defines a linearly independent path of execution in CFG?",options:["A path in which there are no branches","A path which does not contain other paths within it","A path that represents structural complexity of a program","A path within a connected component"],ans:1},
-{week:3,q:10,text:"Node and edge coverage as test requirements for structural coverage over graphs are given with the input graph itself. True/False?",options:["True","False"],ans:0},
-
-// Week 4
-{week:4,q:1,text:"Which best describes a test driver?",options:["It is a special purpose implementation of a software module, used to develop or test a component that calls it.","It is a software component that replaces another component that takes care of the control and/or the calling of a software component"],ans:1},
-{week:4,q:2,text:"If method A writes v and B reads v, what coupling?",options:["Parameter coupling","Interface coupling","External coupling","Shared data coupling"],ans:3},
-{week:4,q:3,text:"To test sequencing constraints from spec, which tests are used?",options:["Tests are inputs that violate constraints","Tests are inputs that satisfy constraints","Tests are sequences of method calls as in specification","Tests are randomly generated sequencing constraints"],ans:2},
-{week:4,q:4,text:"A simple path from the last definition to the first use of a coupling variable is called...",options:["A du-path","A coupling du-path"],ans:1},
-{week:4,q:5,text:"Are control flow graphs representing code the same as finite state machines that represent the same code? True/False?",options:["Yes","No"],ans:1},
-{week:4,q:6,text:"Graph satisfying sequencing constraints: which constraints satisfied? (lecture question)",options:["All constraints are satisfied","(1)&(2) satisfied but (3)&(4) not","(1),(2),(3) satisfied but (4) not","All constraints violated"],ans:2},
-{week:4,q:7,text:"Does path (1,4,5,7) satisfy constraint (4)? True/False? (refer to swayam for diagram)",options:["True","False"],ans:1},
-{week:4,q:8,text:"Does path (1,2,3,7) satisfy all constraints? True/False? (refer to swayam for diagram)",options:["True","False"],ans:0},
-{week:4,q:9,text:"Does the path (1,4,6,7) violate any constraints? Yes/No? (refer to swayam for diagram)",options:["Yes","No"],ans:1},
-{week:4,q:10,text:"Does path (1,4,6,4,6,7) satisfy all constraints? Yes/No? (refer to swayam for diagram)",options:["Yes","No"],ans:0},
-
-// Week 5
-{week:5,q:1,text:"GACC subsumes predicate coverage. True/False?",options:["True","False"],ans:1},
-{week:5,q:2,text:"Testing to check if a clause does not determine a predicate is which coverage?",options:["Active coverage criteria","Inactive coverage criteria"],ans:1},
-{week:5,q:3,text:"Correct order of subsumption among logic coverage?",options:["Correlated active clause coverage → Predicate coverage → Clause coverage","Combinatorial coverage → Predicate coverage → Clause coverage","Combinatorial coverage → Correlated active clause coverage → Predicate coverage","General active clause coverage → Correlated active clause coverage → Clause coverage"],ans:2},
-{week:5,q:4,text:"Which represents pa, conditions under which clause a determines p? (refer to swayam for truthtable)",options:["b∧c","b∨c","¬b∨¬c","¬b∧¬c"],ans:2},
-{week:5,q:5,text:"Which represents pb, conditions under which clause b determines p? (refer to swayam for truthtable)",options:["a∧c","a∨c","¬a∧c","¬a∨¬c"],ans:2},
-{week:5,q:6,text:"Which represents pc, conditions under which clause c determines p? (refer to swayam for truthtable)",options:["¬a∧b","¬a∨b"],ans:0},
-{week:5,q:7,text:"Which represents GACC pairs for clause a? (refer to swayam for truthtable)",options:["{2,3,4}×{6,7,8}","{1,3,4}×{5,6,7}"],ans:0},
-{week:5,q:8,text:"GACC pairs for clauses b and c are the same. True/False? (refer to swayam for truthtable)",options:["True","False"],ans:1},
-{week:5,q:9,text:"The set {(2,6),(3,7),(4,8)} is the set of RACC pairs for which clause? (refer to swayam for truthtable)",options:["Clause a","Clause b"],ans:0},
-{week:5,q:10,text:"CACC pairs for clauses a,b,c are different from GACC pairs for these clauses. True/False?",options:["True","False"],ans:1},
-
-// Week 6
-{week:6,q:1,text:"While applying logic-based testing, can predicates be taken exactly as in code always?",options:["Yes","No, sometimes we have to add extra clauses"],ans:1},
-{week:6,q:2,text:"How do logical predicates occur in finite state machines?",options:["As part of states","As guards in transitions"],ans:1},
-{week:6,q:3,text:"In requirements spec, where do logical predicates occur?",options:["Directly as part of requirements","As pre-conditions, invariants and post-conditions"],ans:1},
-{week:6,q:4,text:"Internal variable z needs to be re-written in terms of input parameters x and y. True/False? (refer to swayam for code)",options:["True","False"],ans:0},
-{week:6,q:5,text:"Is predicate coverage for first predicate subsuming for second predicate? True/False? (refer to swayam for code)",options:["True","False"],ans:1},
-{week:6,q:6,text:"How many test cases for clause coverage for second predicate if counting true/false for each clause? (refer to swayam for code)",options:["Two test cases","Four test cases"],ans:1},
-{week:6,q:7,text:"Does set {(x=5,y=3),(x=4,y=6),(x=5,y=6)} satisfy clause coverage for second predicate? True/False? (refer to swayam for code)",options:["True","False"],ans:0},
-{week:6,q:8,text:"Does the set {(x=5,y=3),(x=4,y=6),(x=5,y=6)} also satisfy predicate coverage for first and second predicates? Yes/No? (refer to swayam for code)",options:["Yes","No"],ans:0},
-{week:6,q:9,text:"How many test cases needed for satisfying RACC for all clauses for second predicate? (refer to swayam for code)",options:["Only one","Two","Three","Five"],ans:2},
-{week:6,q:10,text:"Does set {(x=4,y=6),(x=6,y=4),(x=4,y=5)} satisfy RACC for second predicate? True/False? (refer to swayam for code)",options:["True","False"],ans:0},
-
-// Week 7 - LONG description included for Q1 with newline before "How"
-{week:7,q:1,text:"(For the first five questions, consider the following set of requirements for a college job placement process. If the CGPA is ≥ 8 (out of 10), then the students are eligible for companies that offer salaries ≥ INR 20,00,000/= per annum. If the CGPA is between 6 and 8 then they are eligible for companies that offer salaries less than INR 20,00,000/= per annum. If there aren’t any companies with salary offers ≥ INR 20,00,000/= per annum in a particular period, then those with CGPA ≥ 8 will also appear in the companies in the lower salary categories. Those with less than 6 CGPA will not be assisted by the college placement office for their placements. Answer the following questions related to equivalence partitioning based testing of these requirements.)\nHow many partitions for input CGPA if considering only valid inputs?",options:["Three","Five"],ans:0},
-{week:7,q:2,text:"Do inputs {8,9,9.5} belong to same partition? Yes/No?",options:["Yes","No"],ans:0},
-{week:7,q:3,text:"Expected output for CGPA=8 test case?",options:["Eligibility for offers above INR 20,00,000 and if none, eligible for all offers","Only eligible for offers above INR 20,00,000"],ans:0},
-{week:7,q:4,text:"A student with CGPA 6 eligible for placements for companies with salary 20,00,000? True/False?",options:["True","False"],ans:1},
-{week:7,q:5,text:"Which partitioning of inputs is correct?",options:["Salary range: INR x to INR 20,00,000; INR 20,00,001 to INR y","Salary range: INR 0 to INR 20,00,000; ≥ INR 20,00,000","Both options above can be valid partitions","None"],ans:2},
-{week:7,q:6,text:"Which coverage is most expressive/least expressive?",options:["All combinations least, multiple base choice most","All combinations most, multiple base choice least","Each choice most, all combinations least","Each choice least, all combinations most"],ans:3},
-{week:7,q:7,text:"Multiple base choice coverage subsumes pair-wise coverage. True/False?",options:["True","False"],ans:1},
-{week:7,q:8,text:"Which criterion will have maximum number of test cases?",options:["Each choice criterion","All combinations criterion","Base choice coverage","Multiple base choice coverage"],ans:1},
-{week:7,q:9,text:"When does T-wise coverage same as all combinations?",options:["When T is maximum value in a partition","When T equals number of partitions"],ans:1},
-{week:7,q:10,text:"While partitioning using equivalence partitioning, consider both valid and invalid inputs? Yes/No?",options:["Yes","No"],ans:0},
-
-// Week 8
-{week:8,q:1,text:"Regular expression (a+b)·(a+b)* (a+b): which list of words generated?",options:["ab, a, aab","abab, babab","aaa, bbb","All of the above"],ans:3},
-{week:8,q:2,text:"Language for same regex is:",options:["Words with at least one a and at least one b","Words with at least one a or at least one b"],ans:1},
-{week:8,q:3,text:"While parsing to extract syntactic info, which defines how characters form tokens?",options:["Regular expressions","Context-free grammars","Context-sensitive grammars","Normal form of grammar"],ans:0},
-{week:8,q:4,text:"Grammar G with productions S→aXb, X→ab: language generated?",options:["{w | w = aabb}","{w | w is of the form a^n b^n, n ≥ 1}"],ans:0},
-{week:8,q:5,text:"Is the ground string in mutation testing the same as the program under test? Yes/No?",options:["Yes","No"],ans:0},
-{week:8,q:6,text:"Which mutant can be killed by any test case?",options:["Dead mutant","Equivalent mutant","Trivial mutant","Idempotent mutant"],ans:2},
-{week:8,q:7,text:"Mutation from if(x<0 && z==5) to if(x>0 && z==5) is which operator?",options:["Replacing a logical operator","Replacing a relational operator","Replacing a decision statement","Replacing a condition statement"],ans:1},
-{week:8,q:8,text:"Replacing assignment with failOnZero() is mutation operator at which level?",options:["Program level","Integration level","Statement level","De-bugging level"],ans:0},
-{week:8,q:9,text:"Applying two or three mutation operators together to find many errors: useful?",options:["Yes","No, operators work best one at a time"],ans:1},
-{week:8,q:10,text:"Mutation testing can show program behaves identically when operation replaced/removed. True/False?",options:["True","False"],ans:0},
-
-// Week 9
-{week:9,q:1,text:"How is overloading different from overriding?",options:["Overloading occurs between methods in same class and overriding occurs between methods in a class and its descendant","Overloading occurs between a method in a class and one of its descendants and overriding occurs between two methods in same class"],ans:0},
-{week:9,q:2,text:"Which represents use of super() keyword?",options:["Sub-classes can explicitly use their parent's variables and methods using super()","Sub-classes can use their own variables and not inherited ones using super()"],ans:0},
-{week:9,q:3,text:"When deleting a method call as mutation, how is return value handled?",options:["Call deleted so caller call deleted","Value replaced with a suitable statement in caller","A message sent to caller indicating no value","Value replaced with fixed constant value"],ans:3},
-{week:9,q:4,text:"When mutation testing applied as black-box to mutate inputs, which holds?",options:["Both inputs and program mutated","Only inputs are mutated","Inputs not mutated, program mutated random statement","Inputs not mutated, program mutated in statements processing inputs"],ans:1},
-{week:9,q:5,text:"Changing is-divisible(a,b) to is-divisible(b,a) is which operator?",options:["Integration parameter variable replacement","Integration parameter variable exchange"],ans:1},
-{week:9,q:6,text:"Does Java support multiple class inheritance (so each class only has single parent)? Yes/No?",options:["Yes","No"],ans:0},
-{week:9,q:7,text:"Integration mutation operator changing order of arguments to match another overloading method is?",options:["Overloading method change","Argument number change","Argument order change","Reference type change"],ans:2},
-{week:9,q:8,text:"While testing inputs using mutation testing, inputs always have to adhere to underlying syntax? True/False?",options:["True","False"],ans:1},
-{week:9,q:9,text:"To ensure mutation testing subsumes edge coverage, which operators are used?",options:["Relational operator replacement","Statement replacement","Logical operator replacement","Condition statement replacement"],ans:0},
-{week:9,q:10,text:"To subsume all-defs coverage via mutation testing, which is true?",options:["Need strong mutation applied to statements with variable definitions","Both weak and strong mutation on statements with definitions will work"],ans:0},
-
-// Week 10
-{week:10,q:1,text:"Which features of static websites are tested using graphs?",options:["Check connections & dead links","Check correctness of information in each linked page"],ans:0},
-{week:10,q:2,text:"While testing web applications, which is true regarding client-side vs server-side testing?",options:["Client and server are separated and testers typically don't have access to server code","Testers have equal access to client and server code even though separated"],ans:0},
-{week:10,q:3,text:"Is it possible to generate all the input screens that are passed to a web application? Yes/No?",options:["Yes","No"],ans:1},
-{week:10,q:4,text:"Which techniques can provide test values to a web application?",options:["Generate values automatically","Request user to supply inputs","Random choice, user session data, construct based on domain","Generate inputs randomly and then choose based on application"],ans:2},
-{week:10,q:5,text:"Which features can be checked using HTML without extra scripting?",options:["Change of transfer mode, checking length of input and checking against list of pre-defined values","Change of transfer mode and data type of input","Checking inter-dependency of input values","Checking for length and data type"],ans:0},
-{week:10,q:6,text:"Is a control graph model useful for system level properties of web applications? Yes/No?",options:["Yes","No"],ans:0},
-{week:10,q:7,text:"Which is complete list of operators used in component expressions?",options:["Sequencing and selection","Iteration and selection","Sequencing, iteration and selection","Sequencing, iteration, selection and aggregation"],ans:3},
-{week:10,q:8,text:"What are nodes of a yo-yo graph?",options:["Nodes are classes of inheritance hierarchy","Nodes are methods of different classes, one node for each new, inherited and overridden method"],ans:1},
-{week:10,q:9,text:"What best defines edges of a yo-yo graph?",options:["Edges are method calls among methods of different classes","Edges among classes at different levels of inheritance","Edges from a caller method to a callee method","Edges are either actual method calls or calls that cannot be made due to overriding"],ans:3},
-{week:10,q:10,text:"All faults in object-oriented programs can be determined statically. True/False?",options:["True","False"],ans:1},
-
-// Week 11
-{week:11,q:1,text:"Is concolic testing a white-box testing technique? Yes/No?",options:["Yes","No"],ans:0},
-{week:11,q:2,text:"Which is true about concolic testing?",options:["Concolic testing is used instead of symbolic testing when the latter fails","Concolic testing keeps concrete state and symbolic state"],ans:1},
-{week:11,q:3,text:"What is the use of a SAT/SMT solver in symbolic testing?",options:["Solvers collect path constraints","Solvers solve path constraints and get values used as test inputs","Constraint solvers are not useful","Constraint solvers on predicates always return true or false"],ans:1},
-{week:11,q:4,text:"Symbolic execution can be used to detect non-termination in programs. True/False?",options:["True","False"],ans:1},
-{week:11,q:5,text:"Which list of techniques used in DART algorithm?",options:["Random testing, symbolic testing and constraint solvers","Symbolic testing and automated testing","Directed search, random testing and constraint solvers","Concrete testing and symbolic testing"],ans:2},
-{week:11,q:6,text:"Which strategy is used for input search in concolic testing?",options:["Random search","Systematic random search interleaved with path-sensitive search"],ans:1},
-{week:11,q:7,text:"What does the code fragment (swap routine) do? (refer to swayam for code)",options:["It checks if x is greater than y","It checks if y is greater than x","It swaps the values of x and y","It swaps the values of x and y twice"],ans:2},
-{week:11,q:8,text:"How many decision points and execution paths are there? (refer to swayam for code)",options:["Two decision points and three execution paths","Three decision points and four execution paths"],ans:0},
-{week:11,q:9,text:"What will be the path constraint at line 1 so program exits without further execution? (refer to swayam for code)",options:["x > y","x <= y"],ans:1},
-{week:11,q:10,text:"Is the error statement reachable in the program fragment? Yes/No? (refer to swayam for code)",options:["Yes","No"],ans:0},
-
-// Week 12
-{week:12,q:1,text:"Regression testing is a white-box testing technique as it tests for changes done to the code. True/False?",options:["True","False"],ans:1},
-{week:12,q:2,text:"When do we say a test case t is obsolete for P' (modified program)?",options:["t is obsolete if it has an input that is not valid for P'","t is obsolete if it does not produce an output on execution"],ans:0},
-{week:12,q:3,text:"Testing for non-functional or quality requirements can be done at all phases of software development. True/False?",options:["True","False"],ans:0},
-{week:12,q:4,text:"If version X (2007) can be used on version Y (2010), what indicates compatibility?",options:["X is forward compatible","X is backward compatible"],ans:0},
-{week:12,q:5,text:"File with Readonly access to all users is example of which quality requirement?",options:["Confidentiality","Reliability","Security authorization","Security authentication"],ans:2},
-{week:12,q:6,text:"Installation instructions are part of what?",options:["Software documentation","Software operations procedure","Regulatory requirements","Availability requirements"],ans:0},
-{week:12,q:7,text:"Testing to find upper limit capacity of inputs a system can handle is called?",options:["Performance testing","Load testing","Spike testing","Stress testing"],ans:3},
-{week:12,q:8,text:"Key challenges in testing mobile applications?",options:["Device fragmentation, different mobile networks, compatibility across platforms","Mobile apps different from desktop are key challenge","Mobile apps must be tested within a phone only","Testing across platforms is the only key challenge"],ans:0},
-{week:12,q:9,text:"When performance testing for mobile apps, which aspects tested for?",options:["Screen size, OS and browsers","Network coverage, memory and battery","Speed with uniform user experience","Load and stress in terms of number of users"],ans:1},
-{week:12,q:10,text:"Which interrupts are mobile apps tested for?",options:["Network coverage, memory and battery","Network outage, incoming/outgoing calls and messages"],ans:1}
-]; // end QUESTIONS
-
-// DOM refs
 const weekSelect=document.getElementById('weekSelect');
 const weekChips=document.getElementById('weekChips');
 const modeSelect=document.getElementById('mode');
@@ -311,7 +284,6 @@ const resultArea=document.getElementById('resultArea');
 
 const WEEKS = Array.from(new Set(QUESTIONS.map(q=>q.week))).sort((a,b)=>a-b);
 
-// populate weekSelect and chips
 function buildWeekControls(){
   weekSelect.innerHTML='';
   const optAll=document.createElement('option'); optAll.value='all'; optAll.textContent='All Weeks'; weekSelect.appendChild(optAll);
@@ -342,7 +314,7 @@ function startTest(){
   if(state.mode === 'mock'){
     const n = Math.min(20, pool.length);
     state.order = shuffle(Array.from({length:pool.length},(_,i)=>i)).slice(0,n);
-    state.timeLimit = Math.ceil(n * 1.5); // minutes
+    state.timeLimit = Math.ceil(n * 1.5);
     state.timeLeft = state.timeLimit * 60;
     submitBtn.classList.remove('hide'); revealBtn.classList.add('hide'); endBtn.classList.remove('hide');
   } else {
@@ -361,7 +333,6 @@ function renderQuestion(){
   const idx = state.cur;
   qIdx.textContent = idx+1;
   const qObj = state.pool[state.order[idx]];
-  // Use textContent and rely on white-space: pre-line to render '\n'
   questionText.textContent = `Week ${qObj.week} • Q${qObj.q}: ${qObj.text}`;
   optionsList.innerHTML = '';
   explainArea.textContent = '';
@@ -413,7 +384,6 @@ nextBtn.onclick = ()=> { if(state.cur < state.order.length - 1){ state.cur++; re
 prevBtn.onclick = ()=> { if(state.cur > 0){ state.cur--; renderQuestion(); } }
 
 submitBtn.onclick = ()=>{
-  // Score computed on submission (mock mode)
   let correctCount = 0;
   state.answers.forEach((a, idx)=>{
     if(a !== null){
@@ -434,7 +404,6 @@ function showResults(){
   const total = state.order.length; const correct = state.score;
   resultArea.innerHTML = `<h3>Result</h3><div class='small'>Mode: ${state.mode} • Questions: ${total}</div><div style='margin-top:8px'><strong>Score: ${correct} / ${total}</strong> (${Math.round(100*correct/total)}%)</div>`;
 
-  // review list
   const review = document.createElement('div');
   review.style.marginTop = '12px';
   state.order.forEach((ord, idx)=>{
@@ -454,7 +423,6 @@ function showResults(){
 
 function updateScore(){ scoreDisplay.textContent = 'Score: ' + state.score; }
 
-// Timer
 function startTimer(){
   stopTimer();
   state.timer = setInterval(()=>{
@@ -475,11 +443,9 @@ function formatTime(s){ const mm = Math.floor(s/60).toString().padStart(2,'0'); 
 
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a; }
 
-// small helper: clicking weekSelect updates chip
 weekSelect.onchange = ()=>{ const val = weekSelect.value; Array.from(weekChips.children).forEach(c=>{ c.classList.toggle('active', c.dataset.w == val); }); }
 
-// initial
 qTotal.textContent = '0'; qIdx.textContent = '0';
-</script>
+  </script>
 </body>
 </html>
